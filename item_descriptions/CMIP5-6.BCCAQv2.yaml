@@ -1,0 +1,34 @@
+paths:
+  - https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/birdhouse/cccs_portal/indices/Final
+facets:
+  extraction_methods:
+    - name: regex
+      description: "Extract facets from path using regex"
+      inputs:
+        regex: 'https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/dodsC/birdhouse/cccs_portal/indices/Final/(?P<dataset_name>\w+)/(?P<variable_id>\w+)'
+    - name: header_extract
+      inputs:
+        attributes:
+          - institute_id
+          - conventions
+          - frequency
+          - product
+          - modeling_realm
+          - project_id
+          - downscaling_method_id
+          - driving_experiment
+          - driving_model_id
+          - target_dataset_id
+          - target_institute_id
+  aggregation_facets:
+    - title_template
+#  aggregation_facets:
+#    - project_id
+#    - downscaling_method_id
+#    - institute_id
+#    - variable_id
+#    - frequency
+#    - modeling_realm
+templates:
+  title_template: "$project_id,$downscaling_method_id,$institute_id,$variable_id,$frequency,$modeling_realm"
+  description_template: "This is a STAC item from the $project_id project, from the $institute_id institute, part of the $downscaling_method_id model and $variable_id variable"
